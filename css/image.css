@@ -1,0 +1,104 @@
+.x-btn-add {
+	background-image: url('../images/add.png');
+}
+.x-btn-delete {
+	background-image: url('../images/delete.png');
+}
+
+.x-btn-edit {
+	background-image: url('../images/edit.png');
+}
+
+.x-btn-form {
+	background-image: url('../images/form.png');
+}
+
+.x-btn-setting {
+	background-image: url('../images/settings.png');
+}
+
+.x-btn-user {
+	background-image: url('../images/user.png');
+}
+
+.x-btn-report {
+	background-image: url('../images/report.png');
+}
+
+.x-btn-lookup {
+	background-image: url('../images/lookup.png')!important;
+	height: 27px !important; 
+    width: 84px !important;
+}
+
+.green-on {
+	background-image: url('../images/green_on.jpg')!important;
+	height: 64px !important; 
+    width: 64px !important;
+}
+
+.green-off {
+	background-image: url('../images/green_off.jpg')!important;
+	height: 64px !important; 
+    width: 64px !important;
+}
+
+.fire-on {
+	background-image: url('../images/fire_on.jpg')!important;
+	height: 64px !important; 
+    width: 64px !important;
+}
+
+.fire-off {
+	background-image: url('../images/fire_off.jpg')!important;
+	height: 64px !important; 
+    width: 64px !important;
+}
+
+.alarm-on {
+	background-image: url('../images/alarm_on.jpg')!important;
+	height: 64px !important; 
+    width: 64px !important;
+}
+
+.alarm-off {
+	background-image: url('../images/alarm_off.jpg')!important;
+	height: 64px !important; 
+    width: 64px !important;
+}
+
+.light-on {
+	background-image: url('../images/deng_on.jpg')!important;
+	height: 64px !important; 
+    width: 64px !important;
+}
+
+.light-off {
+	background-image: url('../images/deng_off.jpg')!important;
+	height: 64px !important; 
+    width: 64px !important;
+}
+
+.rail-on {
+	background-image: url('../images/rail_on.jpg')!important;
+	height: 64px !important; 
+    width: 64px !important;
+}
+
+.rail-off {
+	background-image: url('../images/rail_off.jpg')!important;
+	height: 64px !important; 
+    width: 64px !important;
+}
+
+.bridge-on {
+	background-image: url('../images/bridge_on.jpg')!important;
+	height: 64px !important; 
+    width: 64px !important;
+}
+
+.bridge-off {
+	background-image: url('../images/bridge_off.jpg')!important;
+	height: 64px !important; 
+    width: 64px !important;
+}

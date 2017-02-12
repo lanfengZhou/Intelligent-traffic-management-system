@@ -1,0 +1,68 @@
+.x-tree-node-text {
+	font-size: 13px;
+    line-height: 13px;
+    padding-left: 3px;
+}
+
+.x-tab-default .x-tab-inner {
+	color: #416DA3;
+    font-family: tahoma,arial,verdana,sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 13px;
+}
+
+.x-panel-header-text-container-default {
+    color: #04408C;
+    font-family: tahoma,arial,verdana,sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 15px;
+    text-transform: none;
+}
+
+.x-column-header {
+    color: #000000;
+    font: 13px tahoma,arial,verdana,sans-serif;
+}
+
+.x-grid-cell {
+    font: 13px tahoma,arial,verdana,sans-serif;
+}
+
+.x-grid-cell15 {
+    font: 15px tahoma,arial,verdana,sans-serif;
+}
+
+.x-btn-default-toolbar-small .x-btn-inner {
+    color: #333333;
+    font-family: tahoma,arial,verdana,sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.x-btn-default-small .x-btn-inner {
+    color: #333333;
+    font-family: tahoma,arial,verdana,sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.x-toolbar-item .x-form-item-label {
+    font: 13px tahoma,arial,verdana,sans-serif;
+}
+
+.x-toolbar {
+    font-size: 13px;
+}
+
+.x-panel-body-custom {
+    color: #0000FF;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.x-header-text {
+    white-space: nowrap;
+    font-size: 13px;
+}

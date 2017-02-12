@@ -1,0 +1,394 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>智能交通管理系统</title>
+		<!-- jqGrid组件基础样式包-必要 -->
+		<link rel="stylesheet" href="jqgrid/css/ui.jqgrid.css" />
+		<link rel="stylesheet" href="jqgrid/css/index.css" />
+		<!-- jqGrid主题包-非必要 --> 
+		<!-- 在jqgrid/css/css这个目录下还有其他的主题包，可以尝试更换看效果 -->
+		<link rel="stylesheet" href="jqgrid/css/css/redmond/jquery-ui-1.8.16.custom.css" />
+		
+		<!-- jquery插件包-必要 -->
+		<!-- 这个是所有jquery插件的基础，首先第一个引入 -->
+		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="js/jquery.metadata.js"></script>
+		<script type="text/javascript" src="js/messages_zh.js"></script>
+		<!-- jqGrid插件包-必要 -->
+		<script type="text/javascript" src="jqgrid/js/jquery.jqGrid.src.js"></script>
+		
+		<!-- jqGrid插件的多语言包-非必要 -->
+		<!-- 在jqgrid/js/i18n下还有其他的多语言包，可以尝试更换看效果 -->
+		<script type="text/javascript" src="jqgrid/js/i18n/grid.locale-cn.js"></script>
+		
+		<!-- 本页面初始化用到的js包，创建jqGrid的代码就在里面 -->
+		<script type="text/javascript" src="js/index.js"></script>
+		<!-- 时间选择器插件 -->
+		<script src="js/dist/moment.min.js" type="text/javascript"></script>
+		<link rel="stylesheet" type="text/css" href="js/dist/daterangepicker.css">
+		<script type="text/javascript" src="js/dist/jquery.daterangepicker.min.js"></script>
+		
+	</head>
+	<body>
+		<div class ="flasher">
+			<embed src ="../images/banner.swf" class="flash"></embed>
+		</div>
+		<div id="overlay"></div>
+		<div class="tras">
+				<div class="infornav">
+					<div  class="navleft">导航栏</div>
+							<ul>
+								<li><a href="javascript:;" class="navlist">智能停车场</a>
+									<ul class="ScUserlist" >
+										<li><a href="javascript:;" id="ScUserAdmin">用户管理</a></li>
+										<li><a href="javascript:;" id="ScUserPlace">车位管理</a></li>
+										<li><a href="javascript:;" id="ScUserHistory">历史记录管理</a></li>
+									</ul></li><!--智能停车场结束!-->
+								<li><a href="javascript:;" class="navlist">ETC</a>
+									<ul class="list2" >
+										<li><a href="javascript:;" id="ETCUserAdmin">用户管理</a></li>
+										<li><a href="javascript:;" id="ETCUserCharge">收费标准管理</a></li>
+										<li><a href="javascript:;" id="ETCUserHistory">历史记录管理</a></li>
+									</ul></li><!--ETC结束!-->
+								<li><a href="javascript:;" class="navlist">其他功能</a>
+									<ul class="list3"  >
+										<li><a href="javascript:;" id="Carnumrec">车牌识别</a></li>
+										<li><a href="javascript:;" id="CatchRed">闯红灯抓拍</a></li>
+									</ul></li><!--其他功能结束!-->
+							</ul></li><!--导航栏结束!-->
+				</div><!--infornav结束!-->
+				<div class="navright">
+					<div class="navright_top">
+						<div class="toptext">欢迎使用智能交通系统</div>
+						<span class="time" id="time"></span>
+						<div class="date" id="date">	
+						</div>
+					</div>
+					<div class="SmartCarfirstpage"></div><!--首页图片!-->
+					<div class="SmartCarUser">
+						<div class="SmartCarnav">
+							<ul>
+								<li><a href="javascript:;" class="button" id="bedata">新用户注册</a></li>
+								<li><a href="javascript:;" class="button" id="revise">修改用户信息</a></li>
+								<li><a href="javascript:;" class="button" id="delete">删除用户信息</a></li>
+								<li><a href="javascript:;" class="button" id="recharge">用户充值</a></li>
+								<li><a href="javascript:;" class="button" id="showall">显示所有记录</a></li>
+							</ul>
+							<input type="text"  value="请输入要查询的车牌号" id="ScUserSearchText" class="ScUserSearchText"/>
+							<span><input type="button" value="按车牌号查询" id="ScUserSearch"  class="ScUserSearch"/></span>
+						</div><!--SmartCarnav!-->
+				
+						<table id="ScUserlist"></table><!--ScUserlist结束!-->
+						<div id="pager1"></div>
+					<br>
+					<form method="post" name="order" id="order" action="" title="" class="newuser newuserW">
+							<table>
+								
+								<tbody>
+								<div class="ui-jqdialog-titlebar ui-widget-header" style="width: 390px;height: 45px;margin: 4px 3px;text-align: left;line-height: 45px; border-radius: 4px"><span class="ui-jqdialog-title" style="float: left;">新用户注册</span>
+								<a class="ui-jqdialog-titlebar-close ui-corner-all" id="topcancle" style="float: right;margin-top: 13px;margin-right: 10px;">
+									<span class="ui-icon ui-icon-closethick"></span>
+								</a></div>
+									<tr>
+										<td><label for="carnumber">停车卡号：</label></td>
+										<td><input type="text" name="ccarnumber" id="carnumber" /></td>
+									</tr>
+									<tr>
+										<td>
+										<label for="carid">车牌号：</label></td>
+										<td><input type="text" name="ccarid" id="carid" value="" /></td>
+									</tr>
+									<tr>
+										<td><label for="cartype">汽车型号：</label></td>
+										<td><select id="cartype"><option>宝马</option><option>奥迪</option></select></td>
+									</tr>
+									<tr>
+										<td><label for="username">用户姓名：</label></td>
+										<td><input type="text" name="cusername"  id="username"/></td>
+									</tr>
+									<tr>
+										<td><label for="userphone">联系电话：</label></td>
+										<td><input type="text" name="cuserphone" id="userphone"/></td>
+									</tr>
+									<tr>
+										<td><label for="carbalance">当前金额：</label></td>
+										<td>
+										<input type="text" name="ccarbalance" id="carbalance"/></td>
+									</tr>
+								</tbody>
+
+							</table>
+						<div class="submit">
+						<a name="id" id="cancle" class="rbutton">取消<span class="ui-icon ui-icon-close"></span> </a>
+						<a  type="button" name="id" id="submit" class="rbutton">提交 <span class="ui-icon ui-icon-disk"></span></a>
+						
+						</div>
+					</form>
+					</div><!--SmartCarUser智能停车场用户管理页结束!-->
+					<div class="SmartCarPlace">
+						<div class="SmartCarnav">
+							<ul>
+								<li><a href="javascript:;" class="Psetbutton" id="CarPlaceSet">设置停车位</a></li>
+								<li><a href="javascript:;" class="Psetbutton" id="CarPriceSet">设置收费单价</a></li>
+								<li><a href="javascript:;" class="Psetbutton" id="RemovePlace">清空停车场</a></li>
+							</ul>
+							<div class="carPlaceShow">车位信息展示--最大车位：<span id="Pnum"></span>&nbsp剩余车位：<span id="Npnum"></span>&nbsp收费单价：<span id="Pprice"></span>元/分钟</div>
+						</div><!--SmartCarnav!-->
+						
+						<table id="ScPlacelist"></table>
+						<div id="pager2"></div>
+					<br>
+					<form method="post" name="setPlaceform" id="setPlaceform" action="" title="" class="newuser setPlaceform">
+							<table>
+								
+								<tbody>
+								<div class="ui-jqdialog-titlebar ui-widget-header" style="width: 390px;height: 45px;margin: 4px 3px;text-align: left;line-height: 45px; border-radius: 4px"><span class="ui-jqdialog-title" style="float: left;">设置最大停车位</span>
+								<a class="ui-jqdialog-titlebar-close ui-corner-all" id="topcanclePlace" style="float: right;margin-top: 13px;margin-right: 10px;">
+									<span class="ui-icon ui-icon-closethick"></span>
+								</a></div>
+									<tr>
+										<td><label for="cmaxplace">最大停车位：</label></td>
+										<td><input type="text" name="cmaxplace" id="Maxplace" class="required" /></td>
+									</tr>
+								</tbody>
+
+							</table>
+						<div class="submit">
+						<a name="id" id="canclePlace" class="rbutton">取消<span class="ui-icon ui-icon-close"></span> </a>
+						<a  type="button" name="id" id="submitPlace" class="rbutton">提交 <span class="ui-icon ui-icon-disk"></span></a>
+						
+						</div>
+					</form>
+					<form method="post" name="setPriceform" id="setPriceform" action="" title="" class="newuser setPlaceform">
+							<table>
+								
+								<tbody>
+								<div class="ui-jqdialog-titlebar ui-widget-header" style="width: 390px;height: 45px;margin: 4px 3px;text-align: left;line-height: 45px; border-radius: 4px"><span class="ui-jqdialog-title" style="float: left;">设置收费单价：</span>
+								<a class="ui-jqdialog-titlebar-close ui-corner-all" id="topcanclePrice" style="float: right;margin-top: 13px;margin-right: 10px;">
+									<span class="ui-icon ui-icon-closethick"></span>
+								</a></div>
+									<tr>
+										<td><label for="cunitprice">收费单价：</label></td>
+										<td><input type="text" name="cunitprice" id="Unitprice" class="required" /></td>
+									</tr>
+								</tbody>
+
+							</table>
+						<div class="submit">
+						<a name="id" id="canclePrice" class="rbutton">取消<span class="ui-icon ui-icon-close"></span> </a>
+						<a  type="button" name="id" id="submitPrice" class="rbutton">提交 <span class="ui-icon ui-icon-disk"></span></a>
+						
+						</div>
+					</form>
+					<form method="post" name="clearPlaceform" id="clearPlaceform" action="" title="" class="newuser setPlaceform">
+							<table>
+								
+								<tbody>
+								<div class="ui-jqdialog-titlebar ui-widget-header" style="width: 390px;height: 45px;margin: 4px 3px;text-align: left;line-height: 45px; border-radius: 4px"><span class="ui-jqdialog-title" style="float: left;">清空停车场</span>
+								<a class="ui-jqdialog-titlebar-close ui-corner-all" id="topcancleClear" style="float: right;margin-top: 13px;margin-right: 10px;">
+									<span class="ui-icon ui-icon-closethick"></span>
+								</a></div>
+									<tr>
+										<td><label>&nbsp&nbsp清空后停车场内车辆将无法自动开出<br>是否继续清空停车场？</label></td>
+									</tr>
+								</tbody>
+
+							</table>
+						<div class="submit">
+						<a name="id" id="cancleClear" class="rbutton">否<span class="ui-icon ui-icon-close"></span> </a>
+						<a  type="button" name="id" id="submitClear" class="rbutton">是<span class="ui-icon ui-icon-disk"></span></a>
+						
+						</div>
+					</form>
+					</div><!--ScPlacelist智能停车场车位管理页结束!-->
+					<div class="SmartCarHistory">
+						<div class="SmartCarnav">
+							<ul>
+								<li><a href="javascript:;" class="button" id="deleteHistory">删除历史记录</a></li>
+								<li><a href="javascript:;" class="button" id="showaHistory">显示所有记录</a></li>
+							</ul>
+							<input type="text"  value="请输入要查询的车牌号" id="ScHistorySearchText" class="ScUserSearchText"/>
+							<span><input type="button" value="按车牌号查询" id="ScHistorySearch"  class="ScUserSearch"/></span>
+							<!-- <span class="time" id="time"></span>
+							<div class="date" id="date">
+								
+							</div> -->
+						</div><!--SmartCarnav!-->
+				
+						<table id="ScHistorylist"></table>
+						<div id="pager3"></div>
+					<br>
+					</div><!--SmartCarHistory智能停车场历史管理管理页结束!-->
+					<div class="ETCUser">
+						<div class="SmartCarnav">
+							<ul>
+								<li><a href="javascript:;" class="Psetbutton" id="ETCbedata">新用户注册</a></li>
+								<li><a href="javascript:;" class="Psetbutton" id="ETCrevise">修改用户信息</a></li>
+								<li><a href="javascript:;" class="Psetbutton" id="ETCdelete">删除用户信息</a></li>
+								<li><a href="javascript:;" class="Psetbutton" id="ETCrecharge">用户充值</a></li>
+								<li><a href="javascript:;" class="Psetbutton" id="ETCshowall">显示所有记录</a></li>
+							</ul>
+							<input type="text"  value="请输入要查询的车牌号" id="ETCnumText" class="ScUserSearchText"/>
+							<span><input type="button" value="按车牌号查询" id="ETCnumSearch"  class="ScUserSearch"/></span>
+							<input type="text"  value="请输入车主姓名" id="ETCnameSearchText" class="ScUserSearchText"/>
+							<span><input type="button" value="按车主姓名查询" id="ETCnameSearch"  class="ScUserSearch"/></span>
+							<!-- <span class="time" id="time"></span>
+							<div class="date" id="date">
+								
+							</div> -->
+						</div><!--SmartCarnav!-->
+				
+						<table id="ETCUserlist"></table>
+						<div id="pager4"></div>
+						<form method="post" name="ETCnewuser" id="ETCnewuser" action="" title="" class="newuser newuserW">
+							<table>
+								
+								<tbody>
+								<div class="ui-jqdialog-titlebar ui-widget-header" style="width: 390px;height: 45px;margin: 4px 3px;text-align: left;line-height: 45px; border-radius: 4px"><span class="ui-jqdialog-title" style="float: left;">新增用户信息</span>
+								<a class="ui-jqdialog-titlebar-close ui-corner-all" id="ETCtopcancle" style="float: right;margin-top: 13px;margin-right: 10px;">
+									<span class="ui-icon ui-icon-closethick"></span>
+								</a></div>
+									<tr>
+										<td><label for="ETCusername">车主：</label></td>
+										<td><input type="text" name="cETCusername" id="ETCusername" /></td>
+									</tr>
+									<tr>
+										<td>
+										<label for="ETCcarid">车牌号：</label></td>
+										<td><input type="text" name="cETCcarid" id="ETCcarid" value="" /></td>
+									</tr>
+									<tr>
+										<td>
+										<label for="ETCelenum">电子标签号：</label></td>
+										<td><input type="text" name="cETCelenum" id="ETCelenum" value="" /></td>
+									</tr>
+									<tr>
+										<td><label for="ETCcartype">车型：</label></td>
+										<td><select id="ETCcartype"><option>小型1</option><option>中型</option><option>大型</option><option>豪华型</option></select></td>
+									</tr>
+									<tr>
+										<td><label for="ETCbalance">金额：</label></td>
+										<td><input type="text" name="cETCbalance"  id="ETCbalance"/></td>
+									</tr>
+									<tr>
+										<td><label for="ETCuserphone">车主电话：</label></td>
+										<td><input type="text" name="cETCuserphone" id="ETCuserphone"/></td>
+									</tr>
+								</tbody>
+
+							</table>
+						<div class="submit">
+						<a name="id" id="ETCUsercancle" class="rbutton">取消<span class="ui-icon ui-icon-close"></span> </a>
+						<a  type="button" name="id" id="ETCUsersubmit" class="rbutton">提交 <span class="ui-icon ui-icon-disk"></span></a>
+						
+						</div>
+					</form>
+					<form method="post" name="ETCrechargeform" id="ETCrechargeform" action="" title="" class="newuser setPlaceform">
+							<table>
+								
+								<tbody>
+								<div class="ui-jqdialog-titlebar ui-widget-header" style="width: 390px;height: 45px;margin: 4px 3px;text-align: left;line-height: 45px; border-radius: 4px"><span class="ui-jqdialog-title" style="float: left;">用户充值</span>
+								<a class="ui-jqdialog-titlebar-close ui-corner-all" id="ETCtopcancleClear" style="float: right;margin-top: 13px;margin-right: 10px;">
+									<span class="ui-icon ui-icon-closethick"></span>
+								</a></div>
+									<tr>
+										<td><label for="ETCname">车牌号</label></td>
+										<td><input type="text" name="cETCname" id="ETCname"/></td>
+									</tr>
+									<tr>
+										<td><label for="ETCchargenum">充值金额</label></td>
+										<td><input type="text" name="cETCchargenum" id="ETCchargenum"/></td>
+									</tr>
+								</tbody>
+
+							</table>
+						<div class="submit">
+						<a name="id" id="ETCcancleClear" class="rbutton">取消<span class="ui-icon ui-icon-close"></span> </a>
+						<a  type="button" name="id" id="ETCsubmitClear" class="rbutton">提交<span class="ui-icon ui-icon-disk"></span></a>
+						
+						</div>
+					</form>
+					<br>
+					</div><!--ETCUserETC用户管理页结束!-->
+					<div class="ETCCharge">
+						<div class="SmartCarnav">
+							<ul>
+								<li><a href="javascript:;" class="button" id="ETCCbedata">新增收费信息</a></li>
+								<li><a href="javascript:;" class="button" id="ETCCrevise">修改收费信息</a></li>
+								<li><a href="javascript:;" class="button" id="ETCCdelete">删除收费信息</a></li>
+							</ul>
+							<input type="text"  value="请输入要查询的车型" id="ETCCSearchText" class="ScUserSearchText"/>
+							<span><input type="button" value="按车型查询" id="ETCCSearch"  class="ScUserSearch"/></span>
+						</div><!--SmartCarnav!-->
+				
+						<table id="ETCChargelist"></table>
+						<div id="pager5"></div>
+					<br>
+					<form method="post" name="ETCNewchargeform" id="ETCNewchargeform" action="" title="" class="newuser setPlaceform">
+							<table>
+								
+								<tbody>
+								<div class="ui-jqdialog-titlebar ui-widget-header" style="width: 390px;height: 45px;margin: 4px 3px;text-align: left;line-height: 45px; border-radius: 4px"><span class="ui-jqdialog-title" style="float: left;">新增收费信息</span>
+								<a class="ui-jqdialog-titlebar-close ui-corner-all" id="ETCNewchargetop" style="float: right;margin-top: 13px;margin-right: 10px;">
+									<span class="ui-icon ui-icon-closethick"></span>
+								</a></div>
+									<tr>
+										<td><label for="ETCType">车型</label></td>
+										<td><input type="text" name="cETCType" id="ETCType" class="required" /></td>
+									</tr>
+									<tr>
+										<td><label for="ETCPerprice">单次收费</label></td>
+										<td><input type="text" name="cETCPerprice" id="ETCPerprice" class="required number" /></td>
+									</tr>
+								</tbody>
+
+							</table>
+						<div class="submit">
+						<a name="id" id="ETCNewcancle" class="rbutton">取消<span class="ui-icon ui-icon-close"></span> </a>
+						<a  type="button" name="id" id="ETCNewsubmit" class="rbutton">提交<span class="ui-icon ui-icon-disk"></span></a>
+						
+						</div>
+					</form>
+					</div><!--ETCUserETC收费标准管理页结束!-->
+				<div class="ETCHistory">
+						<div class="SmartCarnav">
+							<ul>
+								<li><a href="javascript:;" class="Psetbutton" id="ETCHdelete">删除历史记录</a></li>
+							</ul>
+							<input type="text"  value="请输入要查询的车牌号" id="ETCHnumtext" class="ScUserSearchText"/>
+							<span><input type="button" value="按车牌号查询" id="ETCHnum"  class="ScUserSearch"/></span>
+							<input type="text"  value="请输入车主姓名" id="ETCHnametext" class="ScUserSearchText"/>
+							<span><input type="button" value="按姓名查询" id="ETCHname"  class="ScUserSearch"/></span>
+							<div class="timerplug">
+								<div id="two-inputs"><input id="startTime" size="20" value=""/> To <input id="stopTime" size="20" value=""/></div>
+							</div><span><input type="button" value="按时间查询" id="ETCHtime"  class="ScUserSearch"/></span>
+						</div><!--SmartCarnav!-->
+				
+						<table id="ETCHistorylist"></table>
+						<div id="pager6"></div>
+					<br>
+				</div><!--ETCUserETC历史记录管理页结束!-->
+				<div class="CarNumRec">
+					<div class="SmartCarnav">
+						<ul>
+							<li><a href="javascript:;" class="Psetbutton" id="CarNumRecHdelete">删除历史记录</a></li>
+						</ul>
+					</div>
+					<table id="CarNumReclist"></table>
+					<div id="pager7"></div>
+				</div> <!--车牌识别管理页结束!-->
+				<div class="CarRed">
+					<div class="SmartCarnav">
+						<ul>
+							<li><a href="javascript:;" class="Psetbutton" id="CarRedHdelete">删除历史记录</a></li>
+						</ul>
+					</div>
+					<table id="CarRedlist"></table>
+					<div id="pager8"></div>
+				</div> <!--闯红灯管理页结束!-->
+			</div>
+		</div>	
+	</body>
+</html>
